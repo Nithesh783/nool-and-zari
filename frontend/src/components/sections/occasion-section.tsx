@@ -3,30 +3,8 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { occasions } from "@/data/homepage";
 import styles from "./occasion-section.module.css";
-
-const occasions = [
-  {
-    name: "Wedding Trousseau",
-    image: "/images/product-saffron-gulab.jpg",
-    imageAlt: "Bride in an embroidered saffron lehenga",
-  },
-  {
-    name: "Festive Edit",
-    image: "/images/hero-banarasi-model.jpg",
-    imageAlt: "Woman wearing a pink Banarasi silk saree",
-  },
-  {
-    name: "Elevated Essentials",
-    image: "/images/category-organza-chanderi.jpg",
-    imageAlt: "Woman wearing an ivory saree with delicate gold motifs",
-  },
-  {
-    name: "Vacation Edit",
-    image: "/images/category-kanjivaram-new.jpg",
-    imageAlt: "Woman wearing a slate-blue silk saree",
-  },
-];
 
 export default function OccasionSection() {
   const trackRef = useRef<HTMLDivElement>(null);

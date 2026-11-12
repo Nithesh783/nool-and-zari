@@ -19,7 +19,7 @@ export const heroSarees: HeroSaree[] = [
     modelImage: "/images/hero-katan-model.jpg",
     modelAlt: "Model wearing a rani-pink silk sari with antique-gold zari",
     drapeDescription: "Katan Brocade",
-    price: "$1,280",
+    price: "₹1,280",
     collectionLabel: "Bridal Heirlooms",
   },
   {
@@ -30,7 +30,7 @@ export const heroSarees: HeroSaree[] = [
     modelImage: "/images/hero-banarasi-model.jpg",
     modelAlt: "Model wearing an emerald-green Banarasi silk sari",
     drapeDescription: "Banarasi Silk",
-    price: "$920",
+    price: "₹920",
     collectionLabel: "Varanasi Heritage",
   },
   {
@@ -41,7 +41,7 @@ export const heroSarees: HeroSaree[] = [
     modelImage: "/images/hero-kanchipuram-model.jpg",
     modelAlt: "Midnight-blue silk sari on a mannequin with a traditional gold Kanchipuram border",
     drapeDescription: "Kanchipuram Silk",
-    price: "$1,150",
+    price: "₹1,150",
     collectionLabel: "Southern Looms",
   },
   {
@@ -52,7 +52,7 @@ export const heroSarees: HeroSaree[] = [
     modelImage: "/images/hero-tussar-model.jpg",
     modelAlt: "Model wearing an ivory silk sari with delicate gold detailing",
     drapeDescription: "Tussar Zari",
-    price: "$740",
+    price: "₹740",
     collectionLabel: "Atelier Silks",
   },
 ];

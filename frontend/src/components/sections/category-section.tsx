@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import type { Category } from "@/types/homepage";
+import type { Category } from "@/types/catalog";
 
 export default function CategorySection({
   categories,

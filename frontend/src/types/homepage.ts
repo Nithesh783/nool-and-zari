@@ -1,33 +1,3 @@
-export interface Category {
-  id: string;
-  name: string;
-  origin: string;
-  technique: string;
-  startingPrice: string;
-  image: string;
-  imageAlt: string;
-}
-
-export interface ProductSwatch {
-  name: string;
-  color: string;
-}
-
-export interface Product {
-  id: string;
-  name: string;
-  origin: string;
-  weave: string;
-  description: string;
-  price: number;
-  image: string;
-  imageAlt: string;
-  category: "bridal" | "limited" | "all";
-  swatches: ProductSwatch[];
-  sizes?: string[];
-  sizeChartUrl?: string;
-}
-
 export interface Testimonial {
   quote: string;
   initials: string;
@@ -35,7 +5,19 @@ export interface Testimonial {
   details: string;
 }
 
-export interface FooterColumn {
+export interface Occasion {
+  name: string;
+  image: string;
+  imageAlt: string;
+}
+
+export interface CraftDetail {
   title: string;
-  links: { label: string; href: string }[];
+  description: string;
+  icon: "accessibility" | "gem" | "waves";
+}
+
+export interface HeroCredential {
+  label: string;
+  icon: "award" | "check" | "users";
 }

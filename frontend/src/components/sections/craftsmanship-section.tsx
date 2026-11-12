@@ -1,26 +1,12 @@
 import { Accessibility, Gem, Waves } from "lucide-react";
+import { craftDetails } from "@/data/homepage";
 import styles from "./craftsmanship-section.module.css";
 
-const craftDetails = [
-  {
-    title: "Hand-spun Spindles",
-    description:
-      "Naturally sourced cocoon silks turned on gentle wooden taklis.",
-    Icon: Waves,
-  },
-  {
-    title: "24K Dipped Zari",
-    description:
-      "Certified silver threads bathed in micro-micron gold plating.",
-    Icon: Gem,
-  },
-  {
-    title: "Made-to-Measure",
-    description:
-      "Bespoke fall, edging, and blouse embroidery tailored to you.",
-    Icon: Accessibility,
-  },
-];
+const craftIcons = {
+  accessibility: Accessibility,
+  gem: Gem,
+  waves: Waves,
+};
 
 export default function CraftsmanshipSection() {
   return (
@@ -50,13 +36,16 @@ export default function CraftsmanshipSection() {
           patience.
         </p>
         <div className="craft-details">
-          {craftDetails.map(({ title, description, Icon }) => (
-            <article className="craft-detail" key={title}>
-              <Icon size={25} aria-hidden="true" />
-              <h3>{title}</h3>
-              <p>{description}</p>
-            </article>
-          ))}
+          {craftDetails.map(({ title, description, icon }) => {
+            const Icon = craftIcons[icon];
+            return (
+              <article className="craft-detail" key={title}>
+                <Icon size={25} aria-hidden="true" />
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </article>
+            );
+          })}
         </div>
       </div>
       <div className={`craft-visual ${styles.visual}`}>

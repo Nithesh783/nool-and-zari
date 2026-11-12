@@ -1,11 +1,5 @@
-import { allFabricsProducts } from "@/data/homepage";
-
-export interface CartItem {
-  productId: string;
-  color: string;
-  size?: string;
-  quantity: number;
-}
+import { getProductById } from "@/services/catalog";
+import type { CartItem } from "@/types/cart";
 
 const CART_STORAGE_KEY = "nool-zari-cart";
 const CHECKOUT_NOW_STORAGE_KEY = "nool-zari-checkout-now";
@@ -29,9 +23,7 @@ function validateCartItem(value: unknown): CartItem {
     throw new Error("A saved bag item is missing valid product options.");
   }
 
-  const product = allFabricsProducts.find(
-    (item) => item.id === candidate.productId,
-  );
+  const product = getProductById(candidate.productId);
   if (!product || !product.swatches.some((swatch) => swatch.name === candidate.color)) {
     throw new Error("A saved bag item refers to an unavailable product or colour.");
   }
@@ -84,6 +76,14 @@ export function getCartItems(): CartItem[] {
 
 export function getCartCount(): number {
   return getCartItems().reduce((total, item) => total + item.quantity, 0);
+}
+
+export function getCartSubtotal(items: readonly CartItem[]): number {
+  return items.reduce(
+    (total, item) =>
+      total + (getProductById(item.productId)?.price ?? 0) * item.quantity,
+    0,
+  );
 }
 
 export function saveCartItems(items: CartItem[]): void {

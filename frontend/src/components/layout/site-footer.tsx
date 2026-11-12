@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import {
+  ChevronDown,
   Facebook,
   Instagram,
   Mail,
@@ -8,47 +11,75 @@ import {
   Pin,
   Youtube,
 } from "lucide-react";
-
-const footerColumns = [
-  {
-    title: "About",
-    links: [
-      { label: "About Us", href: "#craft" },
-      { label: "Our Story", href: "#craft" },
-      { label: "Stores", href: "#salon" },
-      { label: "FAQs", href: "#footer" },
-    ],
-  },
-  {
-    title: "Customer Care",
-    links: [
-      { label: "Contact Us", href: "#salon" },
-      { label: "Orders & Shipping", href: "#footer" },
-      { label: "Return & Exchange", href: "#footer" },
-      { label: "Terms & Conditions", href: "#footer" },
-    ],
-  },
-];
+import { useState } from "react";
+import { footerColumns } from "@/config/site";
 
 export default function SiteFooter() {
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
+  function toggleSection(section: string) {
+    setOpenSection((current) => (current === section ? null : section));
+  }
+
   return (
     <footer className="site-footer" id="footer">
       <div className="footer-main section-shell">
-        {footerColumns.map((column) => (
-          <section className="footer-column" key={column.title}>
-            <h2>{column.title}</h2>
-            <ul>
-              {column.links.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href}>{link.label}</a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-        <section aria-labelledby="footer-help-title" className="footer-column">
-          <h2 id="footer-help-title">Need Help</h2>
-          <ul className="footer-help-list">
+        {footerColumns.map((column) => {
+          const sectionId = column.title.toLowerCase().replace(/\s+/g, "-");
+          const headingId = `footer-${sectionId}-title`;
+          const panelId = `footer-${sectionId}-links`;
+          const isOpen = openSection === column.title;
+
+          return (
+            <section
+              aria-labelledby={headingId}
+              className={`footer-column footer-accordion${isOpen ? " is-open" : ""}`}
+              key={column.title}
+            >
+              <h2 className="footer-accordion-heading" id={headingId}>
+                {column.title}
+              </h2>
+              <button
+                aria-controls={panelId}
+                aria-expanded={isOpen}
+                className="footer-accordion-toggle"
+                onClick={() => toggleSection(column.title)}
+                type="button"
+              >
+                {column.title}
+                <ChevronDown aria-hidden="true" size={16} />
+              </button>
+              <ul className="footer-accordion-panel" id={panelId}>
+                {column.links.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href}>{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          );
+        })}
+        <section
+          aria-labelledby="footer-help-title"
+          className={`footer-column footer-accordion footer-help-accordion${openSection === "Need Help" ? " is-open" : ""}`}
+        >
+          <h2 className="footer-accordion-heading" id="footer-help-title">
+            Need Help
+          </h2>
+          <button
+            aria-controls="footer-help-links"
+            aria-expanded={openSection === "Need Help"}
+            className="footer-accordion-toggle"
+            onClick={() => toggleSection("Need Help")}
+            type="button"
+          >
+            Need Help
+            <ChevronDown aria-hidden="true" size={16} />
+          </button>
+          <ul
+            className="footer-help-list footer-accordion-panel"
+            id="footer-help-links"
+          >
             <li>
               <a
                 href="https://www.google.com/maps/search/?api=1&query=Chepauk%20Stadium%2C%20Chennai"

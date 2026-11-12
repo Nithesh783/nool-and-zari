@@ -1,22 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
 import { CART_OPEN_EVENT, getCartCount } from "@/services/cart";
-import CartDrawer from "@/components/cart/cart-drawer";
+import CartDrawer from "@/features/cart/cart-drawer";
 import useDismissibleLayer from "@/hooks/use-dismissible-layer";
-
-const navigationLinks = [
-  { label: "New In", href: "/all-fabrics" },
-  { label: "All Fabrics", href: "/all-fabrics" },
-  { label: "Sets", href: "/all-fabrics" },
-  { label: "Sarees", href: "/all-fabrics" },
-  { label: "Accessories", href: "/all-fabrics" },
-  { label: "Sale", href: "/all-fabrics" },
-];
+import { navigationLinks } from "@/config/site";
 
 export default function SiteHeader() {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -69,7 +63,18 @@ export default function SiteHeader() {
     <>
       <header className="site-header luxury-header">
         <div className="header-main luxury-header-main">
-          <div aria-hidden="true" className="header-spacer" />
+          <div className="header-spacer">
+            <button
+              aria-expanded={menuOpen}
+              aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+              className="icon-button menu-toggle luxury-icon"
+              onClick={() => setMenuOpen((open) => !open)}
+              ref={menuButtonRef}
+              type="button"
+            >
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
           <Link
             aria-label="Nool & Zari home"
             className="brand luxury-brand"
@@ -111,16 +116,6 @@ export default function SiteHeader() {
               <ShoppingBag size={20} />
               <span>{bagCount}</span>
             </button>
-            <button
-              aria-expanded={menuOpen}
-              aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-              className="icon-button menu-toggle luxury-icon"
-              onClick={() => setMenuOpen((open) => !open)}
-              ref={menuButtonRef}
-              type="button"
-            >
-              {menuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
           </div>
         </div>
         <nav
@@ -143,12 +138,10 @@ export default function SiteHeader() {
             className="search-panel luxury-search"
             onSubmit={(event) => {
               event.preventDefault();
-              window.dispatchEvent(
-                new CustomEvent("nool-search", { detail: query.trim() }),
-              );
-              document
-                .getElementById("products")
-                ?.scrollIntoView({ behavior: "smooth" });
+              const searchTerm = query.trim();
+              if (!searchTerm) return;
+
+              router.push(`/all-fabrics?q=${encodeURIComponent(searchTerm)}`);
               setSearchOpen(false);
             }}
             ref={searchPanelRef}
@@ -162,6 +155,7 @@ export default function SiteHeader() {
               id="archive-search"
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search the collection"
+              required
               value={query}
             />
             <button aria-label="Submit search" type="submit">

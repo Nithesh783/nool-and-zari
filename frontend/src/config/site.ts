@@ -1,40 +1,29 @@
-import type { FooterColumn } from "@/types/homepage";
-
 export const navigationLinks = [
-  { label: "New Arrivals", href: "#new-arrivals" },
-  { label: "Couture Saris", href: "#categories" },
-  { label: "Lehengas & Silks", href: "#categories" },
-  { label: "Bridal Edit", href: "#products" },
-  { label: "Atelier & Heritage", href: "#craft" },
-  { label: "Reviews", href: "#stories" },
+  { label: "New In", href: "/all-fabrics" },
+  { label: "All Fabrics", href: "/all-fabrics" },
+  { label: "Sets", href: "/all-fabrics" },
+  { label: "Sarees", href: "/all-fabrics" },
+  { label: "Accessories", href: "/all-fabrics" },
+  { label: "Sale", href: "/all-fabrics" },
 ];
 
-export const footerColumns: FooterColumn[] = [
+export const footerColumns = [
   {
-    title: "Collections",
+    title: "About",
     links: [
-      { label: "Kanjivaram Silks", href: "#categories" },
-      { label: "Banarasi Weaves", href: "#categories" },
-      { label: "Organza Chanderi", href: "#categories" },
-      { label: "Bespoke Bridal", href: "#products" },
+      { label: "About Us", href: "#craft" },
+      { label: "Our Story", href: "#craft" },
+      { label: "Stores", href: "#salon" },
+      { label: "FAQs", href: "#footer" },
     ],
   },
   {
-    title: "Atelier",
+    title: "Customer Care",
     links: [
-      { label: "Our Weavers", href: "#craft" },
-      { label: "The Zari Story", href: "#craft" },
-      { label: "Sustainable Craft", href: "#craft" },
-      { label: "Private Appointments", href: "#salon" },
-    ],
-  },
-  {
-    title: "Client Care",
-    links: [
-      { label: "Bespoke Fitting", href: "#salon" },
-      { label: "Shipping & Returns", href: "#footer" },
-      { label: "Care Instructions", href: "#footer" },
-      { label: "Client Concierge", href: "#salon" },
+      { label: "Contact Us", href: "#salon" },
+      { label: "Orders & Shipping", href: "#footer" },
+      { label: "Return & Exchange", href: "#footer" },
+      { label: "Terms & Conditions", href: "#footer" },
     ],
   },
 ];

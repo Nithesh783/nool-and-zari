@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Star } from "lucide-react";
 import type { Testimonial } from "@/types/homepage";
 
@@ -6,6 +9,8 @@ export default function TestimonialsSection({
 }: {
   testimonials: Testimonial[];
 }) {
+  const [isTouchPaused, setIsTouchPaused] = useState(false);
+
   const renderTestimonials = (suffix = "") =>
     testimonials.map((testimonial) => (
       <article
@@ -39,7 +44,18 @@ export default function TestimonialsSection({
       <div
         aria-label="Customer testimonials"
         aria-roledescription="carousel"
-        className="testimonial-marquee"
+        className={
+          isTouchPaused
+            ? "testimonial-marquee is-touch-paused"
+            : "testimonial-marquee"
+        }
+        onTouchStart={() => {
+          if (window.matchMedia("(max-width: 760px)").matches) {
+            setIsTouchPaused(true);
+          }
+        }}
+        onTouchEnd={() => setIsTouchPaused(false)}
+        onTouchCancel={() => setIsTouchPaused(false)}
       >
         <div className="testimonial-track">
           <div className="testimonial-group">{renderTestimonials()}</div>
