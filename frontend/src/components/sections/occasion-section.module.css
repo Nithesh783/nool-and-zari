@@ -1,0 +1,188 @@
+.section {
+  padding-top: 3.6rem;
+  padding-bottom: 3.75rem;
+}
+
+.heading {
+  margin: 0 0 1.5rem;
+  color: var(--indigo);
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.carousel {
+  position: relative;
+}
+
+.track {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  position: relative;
+  display: block;
+  flex: 0 0 calc((100% - 3rem) / 4);
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--silk);
+  color: inherit;
+  text-decoration: none;
+  scroll-snap-align: start;
+}
+
+.image {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--silk);
+}
+
+.coverImage {
+  object-fit: cover;
+  transition: transform 550ms ease;
+}
+
+.card:hover .coverImage {
+  transform: scale(1.035);
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 44%,
+    rgb(12 21 39 / 16%) 65%,
+    rgb(12 21 39 / 66%) 100%
+  );
+}
+
+.cardTitle {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 1.15rem;
+  left: 0.75rem;
+  margin: 0;
+  color: var(--pearl);
+  font-family: var(--serif);
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 35%);
+}
+
+.control {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--pearl);
+  box-shadow: 0 2px 12px rgb(17 30 56 / 16%);
+  color: var(--indigo);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+  visibility: hidden;
+}
+
+.controlLeft {
+  left: 1.25rem;
+}
+
+.controlRight {
+  right: 1.25rem;
+}
+
+.carousel:has(
+    .card:hover,
+    .card:focus-within,
+    .control:hover,
+    .control:focus-visible
+  )
+  .control {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.control:hover {
+  background: var(--indigo);
+  color: var(--pearl);
+}
+
+.control:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 850px) {
+  .card {
+    flex-basis: calc((100% - 1rem) / 2);
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding-top: 2.6rem;
+    padding-bottom: 2.8rem;
+  }
+
+  .heading {
+    margin-bottom: 1rem;
+    font-size: clamp(1.2rem, 4.8vw, 1.55rem);
+    letter-spacing: 0.1em;
+  }
+
+  .track {
+    gap: 0.75rem;
+  }
+
+  .card {
+    flex-basis: 78%;
+  }
+
+  .cardTitle {
+    font-size: clamp(1rem, 5vw, 1.35rem);
+  }
+
+  .control {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+
+  .controlLeft {
+    left: 0.5rem;
+  }
+
+  .controlRight {
+    right: 0.5rem;
+  }
+}

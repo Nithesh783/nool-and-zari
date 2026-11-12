@@ -1,0 +1,379 @@
+.backdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 28px;
+  background: rgb(9 15 27 / 45%);
+  overscroll-behavior: contain;
+}
+
+.dialog {
+  position: relative;
+  display: grid;
+  width: min(980px, 70vw);
+  height: min(600px, calc(100dvh - 56px));
+  max-height: calc(100dvh - 56px);
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  grid-template-rows: minmax(0, 1fr);
+  overflow-y: auto;
+  background: var(--pearl);
+  box-shadow: 0 28px 90px rgb(0 0 0 / 24%);
+  overscroll-behavior: contain;
+}
+
+.closeButton {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgb(17 30 56 / 12%);
+  background: rgb(253 248 246 / 94%);
+  color: var(--indigo);
+  transition: background-color 180ms ease;
+}
+
+.closeButton:hover {
+  background: #fff;
+}
+
+.image {
+  position: relative;
+  min-height: 0;
+  align-self: stretch;
+  background: var(--silk);
+}
+
+.imageContent {
+  object-fit: cover;
+}
+
+.details {
+  align-self: center;
+  padding: clamp(1.25rem, 2.4vw, 2rem);
+}
+
+.brand {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-family: var(--hero-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+}
+
+.title {
+  max-width: 460px;
+  margin: 0;
+  color: var(--indigo);
+  font-family: var(--hero-serif);
+  font-size: clamp(1.05rem, 1.55vw, 1.25rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.price {
+  margin: 0.65rem 0 0;
+  color: var(--ink);
+  font-family: var(--hero-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.variantOptions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.variantOptionsSingle {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.optionGroup {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.optionGroup legend,
+.quantityRow > span {
+  margin-bottom: 0.45rem;
+  color: var(--ink);
+  font-family: var(--hero-sans);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sizeOptions,
+.colorOptions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sizeOption {
+  min-height: 38px;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink);
+  font-size: 12px;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.sizeOption[aria-pressed="true"],
+.colorOption[aria-pressed="true"] {
+  border-color: var(--ink);
+}
+
+.sizeChart {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.colorOption {
+  min-height: 38px;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink);
+  font-size: 12px;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.quantityRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.quantityRow > span {
+  margin: 0;
+}
+
+.quantityControl {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  border: 1px solid var(--border);
+}
+
+.quantityControl button {
+  display: grid;
+  width: 38px;
+  height: 36px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--indigo);
+}
+
+.quantityControl button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.quantityControl > span {
+  min-width: 26px;
+  color: var(--indigo);
+  font-size: 12px;
+  text-align: center;
+}
+
+.validationHint {
+  margin: 0.55rem 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.actions {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  min-height: 40px;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--indigo);
+  font-family: var(--hero-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  transition: background-color 180ms ease, color 180ms ease, opacity 180ms ease;
+}
+
+.primaryAction {
+  background: transparent;
+  color: var(--ink);
+}
+
+.secondaryAction {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--pearl);
+}
+
+.primaryAction:hover:not(:disabled) {
+  background: var(--pearl);
+}
+
+.secondaryAction:hover:not(:disabled) {
+  background: var(--indigo);
+  color: var(--pearl);
+}
+
+.primaryAction:disabled,
+.secondaryAction:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.feedback {
+  min-height: 1em;
+  margin: 0.35rem 0 0;
+  color: var(--indigo);
+  font-size: 11px;
+}
+
+.detailsLink {
+  display: inline-block;
+  margin-top: 0.25rem;
+  color: var(--indigo);
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .dialog {
+    width: min(920px, 100%);
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  }
+
+  .details {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .backdrop {
+    align-items: flex-start;
+    padding: 0;
+  }
+
+  .dialog {
+    width: min(100%, 560px);
+    height: auto;
+    max-height: 100dvh;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    margin: 0 auto;
+  }
+
+  .image {
+    height: auto;
+    align-self: stretch;
+    aspect-ratio: 4 / 3;
+  }
+
+  .details {
+    align-self: start;
+    padding: 1rem 1.1rem 1.3rem;
+  }
+
+  .closeButton {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .title {
+    max-width: 90%;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+  }
+
+}
+
+@media (max-width: 700px) and (max-height: 720px) {
+  .image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .details {
+    padding: 0.8rem 1rem 1rem;
+  }
+
+  .variantOptions {
+    gap: 0.45rem;
+    margin-top: 0.65rem;
+  }
+
+  .optionGroup legend,
+  .quantityRow > span {
+    margin-bottom: 0.3rem;
+  }
+
+  .sizeOptions,
+  .colorOptions {
+    gap: 0.35rem;
+  }
+
+  .colorOption {
+    min-height: 34px;
+  }
+
+  .quantityRow {
+    margin-top: 0.65rem;
+  }
+
+  .actions {
+    gap: 0.4rem;
+    margin-top: 0.65rem;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    min-height: 38px;
+    padding-block: 0.6rem;
+  }
+
+  .validationHint {
+    margin-top: 0.35rem;
+  }
+
+  .feedback {
+    min-height: 0.8em;
+    margin-top: 0.25rem;
+  }
+
+  .detailsLink {
+    margin-top: 0.15rem;
+  }
+}

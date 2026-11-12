@@ -1,0 +1,180 @@
+"use client";
+
+import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
+import { CART_OPEN_EVENT, getCartCount } from "@/services/cart";
+import CartDrawer from "@/components/cart/cart-drawer";
+import useDismissibleLayer from "@/hooks/use-dismissible-layer";
+
+const navigationLinks = [
+  { label: "New In", href: "/all-fabrics" },
+  { label: "All Fabrics", href: "/all-fabrics" },
+  { label: "Sets", href: "/all-fabrics" },
+  { label: "Sarees", href: "/all-fabrics" },
+  { label: "Accessories", href: "/all-fabrics" },
+  { label: "Sale", href: "/all-fabrics" },
+];
+
+export default function SiteHeader() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [bagCount, setBagCount] = useState(0);
+  const [cartOpen, setCartOpen] = useState(false);
+  const closeCart = useCallback(() => setCartOpen(false), []);
+  const searchButtonRef = useRef<HTMLButtonElement>(null);
+  const searchPanelRef = useRef<HTMLFormElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const navigationRef = useRef<HTMLElement>(null);
+  const cartButtonRef = useRef<HTMLButtonElement>(null);
+  const closeSearch = useCallback(() => setSearchOpen(false), []);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+
+  useDismissibleLayer(searchOpen, searchPanelRef, closeSearch, searchButtonRef);
+  useDismissibleLayer(menuOpen, navigationRef, closeMenu, menuButtonRef);
+
+  useEffect(() => {
+    try {
+      setBagCount(getCartCount());
+    } catch (error) {
+      console.error("Unable to read the saved shopping bag.", error);
+    }
+
+    function updateCount(event: Event) {
+      if (
+        event.type !== "nool-bag-change" ||
+        !(event instanceof CustomEvent) ||
+        typeof event.detail !== "number"
+      ) {
+        return;
+      }
+
+      setBagCount(event.detail);
+    }
+
+    function openCart() {
+      setCartOpen(true);
+    }
+
+    window.addEventListener("nool-bag-change", updateCount);
+    window.addEventListener(CART_OPEN_EVENT, openCart);
+    return () => {
+      window.removeEventListener("nool-bag-change", updateCount);
+      window.removeEventListener(CART_OPEN_EVENT, openCart);
+    };
+  }, []);
+
+  return (
+    <>
+      <header className="site-header luxury-header">
+        <div className="header-main luxury-header-main">
+          <div aria-hidden="true" className="header-spacer" />
+          <Link
+            aria-label="Nool & Zari home"
+            className="brand luxury-brand"
+            href="/"
+          >
+            <span>Nool</span>
+            <span aria-hidden="true" className="luxury-ampersand">
+              &amp;
+            </span>
+            <span>Zari</span>
+          </Link>
+          <div className="header-tools luxury-tools">
+            <button
+              aria-expanded={searchOpen}
+              aria-label={searchOpen ? "Close search" : "Search archive"}
+              className="icon-button luxury-icon"
+              onClick={() => setSearchOpen((open) => !open)}
+              ref={searchButtonRef}
+              type="button"
+            >
+              {searchOpen ? <X size={20} /> : <Search size={20} />}
+            </button>
+            <button
+              aria-label="Your profile"
+              className="profile-button luxury-profile"
+              type="button"
+            >
+              <UserRound size={20} aria-hidden="true" />
+            </button>
+            <button
+              aria-label={`Shopping bag, ${bagCount} items`}
+              aria-controls="cart-drawer"
+              aria-expanded={cartOpen}
+              className="icon-button count-icon luxury-icon"
+              onClick={() => setCartOpen((open) => !open)}
+              ref={cartButtonRef}
+              type="button"
+            >
+              <ShoppingBag size={20} />
+              <span>{bagCount}</span>
+            </button>
+            <button
+              aria-expanded={menuOpen}
+              aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+              className="icon-button menu-toggle luxury-icon"
+              onClick={() => setMenuOpen((open) => !open)}
+              ref={menuButtonRef}
+              type="button"
+            >
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+        <nav
+          aria-label="Main navigation"
+          className={`main-nav luxury-nav${menuOpen ? " is-open" : ""}`}
+          ref={navigationRef}
+        >
+          {navigationLinks.map((link) => (
+            <Link
+              href={link.href}
+              key={link.label}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+        {searchOpen && (
+          <form
+            className="search-panel luxury-search"
+            onSubmit={(event) => {
+              event.preventDefault();
+              window.dispatchEvent(
+                new CustomEvent("nool-search", { detail: query.trim() }),
+              );
+              document
+                .getElementById("products")
+                ?.scrollIntoView({ behavior: "smooth" });
+              setSearchOpen(false);
+            }}
+            ref={searchPanelRef}
+            role="search"
+          >
+            <label className="visually-hidden" htmlFor="archive-search">
+              Search the collection
+            </label>
+            <input
+              autoFocus
+              id="archive-search"
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search the collection"
+              value={query}
+            />
+            <button aria-label="Submit search" type="submit">
+              <Search size={18} />
+            </button>
+          </form>
+        )}
+      </header>
+      <CartDrawer
+        dismissTriggerRef={cartButtonRef}
+        onClose={closeCart}
+        open={cartOpen}
+      />
+    </>
+  );
+}
