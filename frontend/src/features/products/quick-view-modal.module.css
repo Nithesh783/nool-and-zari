@@ -56,6 +56,22 @@
   object-fit: cover;
 }
 
+.saleBadge {
+  position: absolute;
+  z-index: 1;
+  top: 16px;
+  left: 16px;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: #e3131b;
+  color: #fff;
+  font-family: var(--hero-sans);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
 .details {
   align-self: center;
   padding: clamp(1.25rem, 2.4vw, 2rem);
@@ -84,12 +100,28 @@
 }
 
 .price {
-  margin: 0.65rem 0 0;
+  margin: 0;
   color: var(--ink);
   font-family: var(--hero-sans);
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.12em;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.65rem;
+}
+
+.compareAtPrice {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--hero-sans);
+  font-size: 11px;
+  text-decoration: line-through;
 }
 
 .variantOptions {

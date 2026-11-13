@@ -6,7 +6,7 @@ import { searchProducts } from "@/services/catalog";
 export const metadata: Metadata = {
   title: "All Fabrics | Nool & Zari",
   description:
-    "Explore ten sample Nool & Zari silk sarees, lehengas, and heirloom fabrics.",
+    "Explore Nool & Zari silk sarees, lehengas, dresses, and heirloom fabrics.",
 };
 
 export default async function AllFabricsPage({
@@ -24,24 +24,16 @@ export default async function AllFabricsPage({
   return (
     <main>
       <section className="all-fabrics-page section-shell">
-        <div className="all-fabrics-heading">
-          <span className="section-kicker">The Nool &amp; Zari Collection</span>
-          <h1>{query ? `Results for "${query}"` : "All Fabrics"}</h1>
-          {query && (
-            <p aria-live="polite" className="all-fabrics-search-count">
-              {products.length} {products.length === 1 ? "product" : "products"}{" "}
-              found
-            </p>
-          )}
-        </div>
-        {products.length > 0 ? (
-          <ProductShowcase products={products} />
-        ) : (
-          <p className="empty-products" role="status">
-            No products match &quot;{query}&quot;. Try a different name, fabric,
-            or keyword.
-          </p>
-        )}
+        <ProductShowcase
+          emptyMessage={
+            query
+              ? `No products match "${query}". Try a different name, fabric, or keyword.`
+              : "There are no fabrics available right now."
+          }
+          key={query || "all-fabrics"}
+          products={products}
+          title={query ? `Results for "${query}"` : "All Fabrics"}
+        />
       </section>
     </main>
   );

@@ -113,9 +113,24 @@ export const featuredProducts: Product[] = [
       { name: "Midnight Indigo", color: "#111e38" },
     ],
   },
+  {
+    id: "anju-modi-hot-pink-anarkali-set",
+    name: "Hot Pink Anarkali Set",
+    origin: "ANJU MODI",
+    description:
+      "A hot pink Anarkali set with multicoloured floral embroidery and a coordinating drape.",
+    price: 63840,
+    compareAtPrice: 79800,
+    image: "/images/anju-modi-hot-pink-anarkali-set.png",
+    imageAlt:
+      "Model wearing a hot pink Anarkali set with colourful embroidered details and a coordinating drape.",
+    category: "limited",
+    sizes: availableSizes,
+    swatches: [{ name: "Hot Pink", color: "#a3164a" }],
+  },
 ];
 
-export const allFabricsProducts: Product[] = [
+const fabricAndApparelProducts: Product[] = [
   ...featuredProducts,
   {
     id: "emerald-kadhwa",
@@ -213,5 +228,240 @@ export const allFabricsProducts: Product[] = [
       { name: "Gold Zari", color: "#d4af37" },
     ],
   },
+  {
+    id: "vaayu-emerald-thread-dress",
+    name: "Emerald Thread embroidered Dress",
+    origin: "VAAYU",
+    description:
+      "A teal dress with delicate floral threadwork and gathered sleeves.",
+    price: 8330,
+    compareAtPrice: 9800,
+    image: "/images/vaayu-emerald-thread-dress.png",
+    imageAlt:
+      "Model wearing a teal dress with floral embroidery and gathered sleeves.",
+    category: "all",
+    sizes: availableSizes,
+    swatches: [{ name: "Emerald Teal", color: "#087778" }],
+  },
+  {
+    id: "ekaya-banaras-i-do-saree",
+    name: "The 'i Do' Saree",
+    origin: "EKAYA BANARAS",
+    description:
+      "A black saree with intricate antique-gold motifs and ornate border work.",
+    price: 33731.25,
+    compareAtPrice: 44975,
+    image: "/images/ekaya-banaras-i-do-saree.png",
+    imageAlt:
+      "Model wearing a black and antique-gold saree with ornate woven borders in a dark, gilded setting.",
+    category: "bridal",
+    sizes: availableSizes,
+    swatches: [{ name: "Black and Gold", color: "#28231f" }],
+  },
+  {
+    id: "banaras-ekaya-black-chiffon-embossed-saree",
+    name: "Handwoven Black Chiffon Embossed Saree",
+    origin: "BANARAS EKAYA",
+    description:
+      "A handwoven black chiffon saree with an elegant embossed floral design.",
+    price: 49975,
+    image: "/images/banaras-ekaya-black-chiffon-embossed-saree.png",
+    imageAlt:
+      "Model wearing a black chiffon saree with silver floral embossing against a red backdrop.",
+    category: "bridal",
+    sizes: availableSizes,
+    swatches: [{ name: "Black and Silver", color: "#28231f" }],
+  },
 ];
+
+export const accessoryProducts: Product[] = [
+  {
+    id: "mesh-studios-heart-red",
+    name: "The Heart - Red",
+    origin: "Mesh Studios",
+    description:
+      "A red textured handbag with a gathered silhouette and rounded top handle.",
+    price: 12500,
+    image: "/images/mesh-studios-heart-red.png",
+    imageAlt: "Red textured handbag with a rounded handle held against denim.",
+    category: "accessories",
+    swatches: [{ name: "Red", color: "#b92831" }],
+  },
+  {
+    id: "amyra-zahri-silk-clutch-pink",
+    name: "Zahri Silk Clutch - Pink",
+    origin: "AMYRA",
+    description:
+      "A pink silk clutch with a structured frame, gold-tone handle, and woven motifs.",
+    price: 3299,
+    image: "/images/amyra-zahri-silk-clutch-pink.png",
+    imageAlt:
+      "Pink silk clutch with a gold-tone handle and floral motifs held against an ivory outfit.",
+    category: "accessories",
+    swatches: [{ name: "Pink", color: "#d62982" }],
+  },
+  {
+    id: "nayaab-serinity-sailor-lattice-mint-maritime",
+    name: "Serinity Sailor Lattice Mint Maritime",
+    origin: "NAYAAB BY SONIA",
+    description:
+      "A beaded ivory clutch with mint accents, pearl detailing, and a fringed silhouette.",
+    price: 11900,
+    image: "/images/nayaab-serinity-sailor-lattice-mint-maritime.png",
+    imageAlt:
+      "Ivory and mint beaded clutch with pearl detailing and a fringed silhouette.",
+    category: "accessories",
+    swatches: [{ name: "Mint", color: "#b9c9ae" }],
+  },
+  {
+    id: "nayaab-pearl-treasure-gold",
+    name: "Pearl Treasure Gold",
+    origin: "NAYAAB BY SONIA",
+    description:
+      "A gold-toned potli bag with pearl embellishment, beaded handles, and tassel detailing.",
+    price: 9000,
+    image: "/images/nayaab-pearl-treasure-gold.png",
+    imageAlt:
+      "Gold-toned potli bag covered in pearls, with beaded handles and a long tassel.",
+    category: "accessories",
+    swatches: [{ name: "Gold", color: "#c49a48" }],
+  },
+  {
+    id: "kesya-nizam-cufflinks",
+    name: "Nizam Cufflinks",
+    origin: "KESYA",
+    description:
+      "Hexagonal black cufflinks framed with a border of clear stones.",
+    price: 14100,
+    image: "/images/kesya-nizam-cufflinks.png",
+    imageAlt:
+      "Pair of black hexagonal cufflinks framed with clear stones on a white background.",
+    category: "accessories",
+    swatches: [{ name: "Black", color: "#171717" }],
+  },
+  {
+    id: "kesya-yellow-jharokha-pocket-square",
+    name: "Yellow Jharokha Pocket Square",
+    origin: "KESYA",
+    description:
+      "A blue pocket square with a yellow Jharokha pattern and border.",
+    price: 1200,
+    image: "/images/kesya-yellow-jharokha-pocket-square.png",
+    imageAlt:
+      "Blue pocket square with a yellow Jharokha pattern and border on a white background.",
+    category: "accessories",
+    swatches: [{ name: "Yellow and Blue", color: "#e5b823" }],
+  },
+  {
+    id: "nayaab-pearl-treasure-clutch-silver",
+    name: "Pearl Treasure Clutch Silver",
+    origin: "NAYAAB BY SONIA",
+    description:
+      "A silver-toned clutch with pearl embellishment and a beaded shoulder handle.",
+    price: 9900,
+    image: "/images/nayaab-pearl-treasure-clutch-silver.png",
+    imageAlt:
+      "Silver-toned pearl-embellished clutch with a beaded handle, carried against a black outfit.",
+    category: "accessories",
+    swatches: [{ name: "Silver", color: "#d8d9d7" }],
+  },
+  {
+    id: "suhani-pittie-imperial-filigree-drop-earrings",
+    name: "The Imperial Filigree Drop Earrings",
+    origin: "SUHANI PITTIE",
+    description:
+      "Gold filigree drop earrings with square stone pendants and ruby-toned accents.",
+    price: 4950,
+    compareAtPrice: 5500,
+    image: "/images/suhani-pittie-imperial-filigree-drop-earrings.png",
+    imageAlt:
+      "Pair of gold filigree drop earrings with pink gem accents arranged on a textured surface.",
+    category: "accessories",
+    swatches: [{ name: "Gold and Pink", color: "#b61e68" }],
+  },
+  {
+    id: "suhani-pittie-crystal-maya-22k-earrings",
+    name: "Crystal Maya 22k Gold Plated Earrings",
+    origin: "SUHANI PITTIE",
+    description:
+      "22k gold-plated sunburst earrings with crystal and ruby-toned stone accents.",
+    price: 5000,
+    compareAtPrice: 10000,
+    image: "/images/suhani-pittie-crystal-maya-22k-earrings.png",
+    imageAlt:
+      "Pair of gold-plated sunburst earrings with crystal and ruby-toned stone details.",
+    category: "accessories",
+    swatches: [{ name: "Gold and Crystal", color: "#c9a34b" }],
+  },
+];
+
+export const setProducts: Product[] = [
+  {
+    id: "anushree-reddy-ember-peplum-set",
+    name: "Ember Peplum Set",
+    origin: "ANUSHREE REDDY",
+    description:
+      "A coral-pink peplum set with delicate floral embroidery and a flowing skirt.",
+    price: 155220,
+    compareAtPrice: 199000,
+    image: "/images/anushree-reddy-ember-peplum-set.png",
+    imageAlt:
+      "Model wearing a coral-pink embroidered peplum top and flowing skirt in a garden.",
+    category: "sets",
+    sizes: availableSizes,
+    swatches: [{ name: "Ember Pink", color: "#e87970" }],
+  },
+  {
+    id: "anushree-reddy-zari-cutwork-peplum-set",
+    name: "Zari Cutwork Peplum Set",
+    origin: "ANUSHREE REDDY",
+    description:
+      "A lime-yellow peplum set with intricate zari cutwork and a flowing skirt.",
+    price: 149000,
+    image: "/images/anushree-reddy-zari-cutwork-peplum-set.png",
+    imageAlt:
+      "Model wearing a lime-yellow embroidered zari cutwork peplum set in a garden.",
+    category: "sets",
+    sizes: availableSizes,
+    swatches: [{ name: "Lime Yellow", color: "#c5b62a" }],
+  },
+  {
+    id: "shalkii-green-lehenga-set-organza-dupatta",
+    name: "Green Lehenga Set With Organza Dupatta",
+    origin: "SHALKII",
+    description:
+      "A sage-green embroidered lehenga set paired with a coordinating organza dupatta.",
+    price: 48000,
+    image: "/images/shalkii-green-lehenga-organza-dupatta-set.png",
+    imageAlt:
+      "Model wearing a sage-green embroidered lehenga set with an organza dupatta.",
+    category: "sets",
+    sizes: availableSizes,
+    swatches: [{ name: "Sage Green", color: "#9da99a" }],
+  },
+  {
+    id: "rohit-bal-black-chanderi-lehenga-set",
+    name: "Black Chanderi Lehenga Set",
+    origin: "ROHIT BAL",
+    description:
+      "A black Chanderi lehenga set with vibrant floral embroidery and a coordinating dupatta.",
+    price: 94999,
+    image: "/images/rohit-bal-black-chanderi-lehenga-set.png",
+    imageAlt:
+      "Model wearing a black Chanderi lehenga set with colorful floral embroidery.",
+    category: "sets",
+    sizes: availableSizes,
+    swatches: [{ name: "Black", color: "#171717" }],
+  },
+];
+
+export const allProducts: Product[] = [
+  ...fabricAndApparelProducts,
+  ...accessoryProducts,
+  ...setProducts,
+];
+
+export const allFabricsProducts = allProducts.filter(
+  (product) => product.category !== "accessories",
+);
 

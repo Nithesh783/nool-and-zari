@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Menu,
@@ -16,6 +16,7 @@ import useDismissibleLayer from "@/hooks/use-dismissible-layer";
 import { navigationLinks } from "@/config/site";
 
 export default function SiteHeader() {
+  const pathname = usePathname();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -172,6 +173,7 @@ export default function SiteHeader() {
         >
           {navigationLinks.map((link) => (
             <Link
+              aria-current={pathname === link.href ? "page" : undefined}
               href={link.href}
               key={link.label}
               onClick={() => setMenuOpen(false)}

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Minus, Plus, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { formatPrice } from "@/services/catalog";
+import { formatPrice, getDiscountPercent } from "@/services/catalog";
 import { addCartItem, setCheckoutNowItem } from "@/services/cart";
 import useDismissibleLayer from "@/hooks/use-dismissible-layer";
 import type { Product } from "@/types/catalog";
@@ -99,6 +99,7 @@ export default function QuickViewModal({
     selectedSize,
   );
   const canPurchase = missingOptions.length === 0;
+  const discountPercent = getDiscountPercent(product);
 
   function getCartItem(): CartItem | null {
     if (!canPurchase) {
@@ -181,13 +182,23 @@ export default function QuickViewModal({
             sizes="(max-width: 700px) 100vw, 52vw"
             src={product.image}
           />
+          {discountPercent !== undefined && (
+            <span className={styles.saleBadge}>{discountPercent}% Off</span>
+          )}
         </div>
         <div className={styles.details}>
           <p className={styles.brand}>{product.origin}</p>
           <h2 className={styles.title} id="quick-view-title">
             {product.name}
           </h2>
-          <p className={styles.price}>{formatPrice(product.price)}</p>
+          <div className={styles.priceRow}>
+            <p className={styles.price}>{formatPrice(product.price)}</p>
+            {product.compareAtPrice !== undefined && (
+              <p className={styles.compareAtPrice}>
+                {formatPrice(product.compareAtPrice)}
+              </p>
+            )}
+          </div>
 
           <div
             className={`${styles.variantOptions}${product.sizes?.length ? "" : ` ${styles.variantOptionsSingle}`}`}

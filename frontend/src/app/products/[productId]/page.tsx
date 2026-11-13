@@ -2,8 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { allFabricsProducts } from "@/data/catalog";
-import { formatPrice, getProductById } from "@/services/catalog";
+import { allProducts } from "@/data/catalog";
+import {
+  formatPrice,
+  getDiscountPercent,
+  getProductById,
+} from "@/services/catalog";
 import ProductPurchaseOptions from "@/features/products/product-purchase-options";
 import styles from "./product-details.module.css";
 
@@ -12,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export function generateStaticParams() {
-  return allFabricsProducts.map((product) => ({ productId: product.id }));
+  return allProducts.map((product) => ({ productId: product.id }));
 }
 
 export default async function ProductDetailsPage({
@@ -25,6 +29,19 @@ export default async function ProductDetailsPage({
   if (!product) {
     notFound();
   }
+  const returnHref =
+    product.category === "accessories"
+      ? "/accessories"
+      : product.category === "sets"
+        ? "/sets"
+        : "/all-fabrics";
+  const returnLabel =
+    product.category === "accessories"
+      ? "Return to Accessories"
+      : product.category === "sets"
+        ? "Return to Sets"
+        : "Return to All Fabrics";
+  const discountPercent = getDiscountPercent(product);
 
   return (
     <main>
@@ -37,25 +54,37 @@ export default async function ProductDetailsPage({
             sizes="(max-width: 750px) 100vw, 50vw"
             src={product.image}
           />
+          {discountPercent !== undefined && (
+            <span className={styles.saleBadge}>{discountPercent}% Off</span>
+          )}
         </div>
         <div className={styles.details}>
           <p className={styles.brand}>{product.origin}</p>
           <h1 className={styles.title}>{product.name}</h1>
-          <p className={styles.price}>{formatPrice(product.price)}</p>
+          <div className={styles.priceRow}>
+            <p className={styles.price}>{formatPrice(product.price)}</p>
+            {product.compareAtPrice !== undefined && (
+              <p className={styles.compareAtPrice}>
+                {formatPrice(product.compareAtPrice)}
+              </p>
+            )}
+          </div>
           <p className={styles.description}>{product.description}</p>
           <dl className={styles.meta}>
-            <div>
-              <dt>Weave</dt>
-              <dd>{product.weave}</dd>
-            </div>
+            {product.weave && (
+              <div>
+                <dt>Weave</dt>
+                <dd>{product.weave}</dd>
+              </div>
+            )}
             <div>
               <dt>Atelier</dt>
               <dd>{product.origin}</dd>
             </div>
           </dl>
           <ProductPurchaseOptions product={product} />
-          <Link className={styles.backLink} href="/all-fabrics">
-            Return to All Fabrics
+          <Link className={styles.backLink} href={returnHref}>
+            {returnLabel}
           </Link>
         </div>
       </article>

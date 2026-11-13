@@ -1,4 +1,4 @@
-import { allFabricsProducts } from "@/data/catalog";
+import { allProducts } from "@/data/catalog";
 import type { Product } from "@/types/catalog";
 
 function normalizeSearchText(value: string): string {
@@ -12,7 +12,7 @@ function normalizeSearchText(value: string): string {
 }
 
 export function getProductById(productId: string): Product | undefined {
-  return allFabricsProducts.find((product) => product.id === productId);
+  return allProducts.find((product) => product.id === productId);
 }
 
 export function searchProducts(
@@ -28,7 +28,7 @@ export function searchProducts(
     .map((product, index) => {
       const name = normalizeSearchText(product.name);
       const origin = normalizeSearchText(product.origin);
-      const weave = normalizeSearchText(product.weave);
+      const weave = normalizeSearchText(product.weave ?? "");
       const description = normalizeSearchText(product.description);
       const fields = [
         name,
@@ -64,6 +64,22 @@ export function formatPrice(price: number): string {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
   }).format(price);
+}
+
+export function getDiscountPercent(
+  product: Pick<Product, "price" | "compareAtPrice">,
+): number | undefined {
+  if (
+    product.compareAtPrice === undefined ||
+    product.compareAtPrice <= product.price
+  ) {
+    return undefined;
+  }
+
+  return Math.round(
+    ((product.compareAtPrice - product.price) / product.compareAtPrice) * 100,
+  );
 }

@@ -1,10 +1,10 @@
 export const navigationLinks = [
-  { label: "New In", href: "/all-fabrics" },
+  { label: "New In", href: "/new-in" },
   { label: "All Fabrics", href: "/all-fabrics" },
-  { label: "Sets", href: "/all-fabrics" },
-  { label: "Sarees", href: "/all-fabrics" },
-  { label: "Accessories", href: "/all-fabrics" },
-  { label: "Sale", href: "/all-fabrics" },
+  { label: "Sets", href: "/sets" },
+  { label: "Sarees", href: "/sarees" },
+  { label: "Accessories", href: "/accessories" },
+  { label: "Sale", href: "/sale" },
 ];
 
 export const footerColumns = [

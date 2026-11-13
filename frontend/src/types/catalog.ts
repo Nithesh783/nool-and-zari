@@ -17,12 +17,13 @@ export interface Product {
   id: string;
   name: string;
   origin: string;
-  weave: string;
+  weave?: string;
   description: string;
   price: number;
+  compareAtPrice?: number;
   image: string;
   imageAlt: string;
-  category: "bridal" | "limited" | "all";
+  category: "bridal" | "limited" | "all" | "accessories" | "sets";
   swatches: ProductSwatch[];
   sizes?: string[];
   sizeChartUrl?: string;

@@ -118,6 +118,7 @@ img {
 }
 
 .luxury-header {
+  --navbar-scale: 0.9;
   background: var(--indigo);
   color: var(--pearl);
   border-bottom: 0;
@@ -148,9 +149,14 @@ img {
 .luxury-header-main {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  height: 70px;
-  min-height: 70px;
-  padding: 0 clamp(1.25rem, 4.75vw, 3.5rem);
+  height: calc(70px * var(--navbar-scale));
+  min-height: calc(70px * var(--navbar-scale));
+  padding: 0
+    clamp(
+      calc(1.25rem * var(--navbar-scale)),
+      calc(4.75vw * var(--navbar-scale)),
+      calc(3.5rem * var(--navbar-scale))
+    );
 }
 
 .header-spacer {
@@ -172,7 +178,7 @@ img {
   justify-self: center;
   color: var(--pearl);
   font-family: var(--hero-serif);
-  font-size: 2.5rem;
+  font-size: calc(2.5rem * var(--navbar-scale));
   font-weight: 400;
   gap: 0.12em;
   letter-spacing: -0.045em;
@@ -204,10 +210,15 @@ img {
 }
 
 .luxury-nav {
-  height: 48px;
-  min-height: 48px;
-  gap: clamp(20px, 3vw, 44px);
-  padding: 0 clamp(1.25rem, 4.75vw, 3.5rem);
+  height: calc(48px * var(--navbar-scale));
+  min-height: calc(48px * var(--navbar-scale));
+  gap: calc(clamp(20px, 3vw, 44px) * var(--navbar-scale));
+  padding: 0
+    clamp(
+      calc(1.25rem * var(--navbar-scale)),
+      calc(4.75vw * var(--navbar-scale)),
+      calc(3.5rem * var(--navbar-scale))
+    );
   background: var(--indigo);
 }
 
@@ -224,7 +235,7 @@ img {
 
 .luxury-nav a {
   color: rgb(253 248 246 / 82%);
-  font-size: 12px;
+  font-size: calc(12px * var(--navbar-scale));
   font-weight: 500;
   letter-spacing: 0.16em;
 }
@@ -247,6 +258,11 @@ img {
   color: var(--pearl);
 }
 
+.luxury-nav a {
+  padding-top: calc(6px * var(--navbar-scale));
+  padding-bottom: calc(5px * var(--navbar-scale));
+}
+
 .header-tools {
   display: flex;
   flex: 0 0 auto;
@@ -257,7 +273,7 @@ img {
 
 .luxury-tools {
   justify-self: end;
-  gap: 24px;
+  gap: calc(24px * var(--navbar-scale));
   color: var(--pearl);
 }
 
@@ -281,9 +297,15 @@ img {
 
 .luxury-icon,
 .luxury-profile {
-  width: 20px;
-  height: 20px;
+  width: calc(20px * var(--navbar-scale));
+  height: calc(20px * var(--navbar-scale));
   color: var(--pearl);
+}
+
+.luxury-icon svg,
+.luxury-profile svg {
+  width: calc(20px * var(--navbar-scale));
+  height: calc(20px * var(--navbar-scale));
 }
 
 .icon-button:hover,
@@ -298,16 +320,16 @@ img {
 
 .count-icon span {
   position: absolute;
-  top: -3px;
-  right: -6px;
+  top: calc(-3px * var(--navbar-scale));
+  right: calc(-6px * var(--navbar-scale));
   display: grid;
-  width: 14px;
-  height: 14px;
+  width: calc(14px * var(--navbar-scale));
+  height: calc(14px * var(--navbar-scale));
   place-items: center;
   border-radius: 50%;
   background: var(--indigo);
   color: white;
-  font-size: 9px;
+  font-size: calc(9px * var(--navbar-scale));
 }
 
 .luxury-icon .count-icon span,
@@ -318,8 +340,8 @@ img {
 
 .profile-button {
   overflow: visible;
-  width: 20px;
-  height: 20px;
+  width: calc(20px * var(--navbar-scale));
+  height: calc(20px * var(--navbar-scale));
   border: 0;
   border-radius: 0;
 }
@@ -901,28 +923,8 @@ img {
 }
 
 .all-fabrics-page {
-  padding-top: 3.5rem;
+  padding-top: 2rem;
   padding-bottom: 4rem;
-}
-
-.all-fabrics-heading {
-  margin-bottom: 2.5rem;
-  text-align: center;
-}
-
-.all-fabrics-heading h1 {
-  margin: 0.45rem 0 0;
-  color: var(--indigo);
-  font-family: var(--serif);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 400;
-}
-
-.all-fabrics-search-count {
-  margin: 0.65rem 0 0;
-  color: var(--muted);
-  font-family: var(--hero-sans);
-  font-size: 13px;
 }
 
 .product-grid {
@@ -1661,16 +1663,18 @@ img {
 
 @media (max-width: 1100px) {
   .luxury-nav {
-    gap: clamp(0.65rem, 1.3vw, 1rem);
+    gap: calc(
+      clamp(0.65rem, 1.3vw, 1rem) * var(--navbar-scale)
+    );
   }
 
   .luxury-nav a {
-    font-size: 12px;
+    font-size: calc(12px * var(--navbar-scale));
     letter-spacing: 0.075em;
   }
 
   .luxury-tools {
-    gap: 0.9rem;
+    gap: calc(0.9rem * var(--navbar-scale));
   }
 
   .hero {
@@ -1724,10 +1728,13 @@ img {
 @media (max-width: 850px) {
   .luxury-header-main {
     display: flex;
-    min-height: 72px;
-    column-gap: clamp(0.35rem, 2vw, 0.75rem);
-    padding-right: 1rem;
-    padding-left: 1rem;
+    height: calc(72px * var(--navbar-scale));
+    min-height: calc(72px * var(--navbar-scale));
+    column-gap: calc(
+      clamp(0.35rem, 2vw, 0.75rem) * var(--navbar-scale)
+    );
+    padding-right: calc(1rem * var(--navbar-scale));
+    padding-left: calc(1rem * var(--navbar-scale));
   }
 
   .header-spacer {
@@ -1754,13 +1761,14 @@ img {
     width: 100%;
     height: auto;
     min-height: 0;
-    max-height: calc(100svh - 6rem);
+    max-height: calc(100svh - 5.4rem);
     overflow-y: auto;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
     gap: 0;
-    padding: 0.5rem 1rem;
+    padding: calc(0.5rem * var(--navbar-scale))
+      calc(1rem * var(--navbar-scale));
     border: 1px solid rgb(255 255 255 / 12%);
     border-radius: 0;
     background: var(--indigo);
@@ -1772,9 +1780,9 @@ img {
   }
 
   .luxury-nav a {
-    padding: 0.7rem 0;
+    padding: calc(0.7rem * var(--navbar-scale)) 0;
     border-bottom: 1px solid rgb(255 255 255 / 10%);
-    font-size: 12px;
+    font-size: calc(12px * var(--navbar-scale));
   }
 
   .luxury-nav a:last-child {
@@ -1788,10 +1796,15 @@ img {
 
   .luxury-nav a[aria-current="page"] {
     color: var(--gold);
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-underline-offset: 0.3rem;
   }
 
   .luxury-tools {
-    gap: clamp(0.5rem, 2.5vw, 0.75rem);
+    gap: calc(
+      clamp(0.5rem, 2.5vw, 0.75rem) * var(--navbar-scale)
+    );
   }
 
   .menu-toggle {
@@ -1909,25 +1922,27 @@ img {
 
 @media (max-width: 600px) {
   .luxury-header-main {
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding-right: calc(1rem * var(--navbar-scale));
+    padding-left: calc(1rem * var(--navbar-scale));
   }
 
   .luxury-brand {
-    font-size: clamp(1.55rem, 7vw, 1.85rem);
+    font-size: calc(
+      clamp(1.55rem, 7vw, 1.85rem) * var(--navbar-scale)
+    );
   }
 
   .luxury-icon,
   .luxury-profile {
-    width: 20px;
-    height: 24px;
-    padding: 1px;
+    width: calc(20px * var(--navbar-scale));
+    height: calc(24px * var(--navbar-scale));
+    padding: calc(1px * var(--navbar-scale));
   }
 
-  .luxury-tools > button > svg,
+  .luxury-icon svg,
   .luxury-profile svg {
-    width: 18px;
-    height: 18px;
+    width: calc(18px * var(--navbar-scale));
+    height: calc(18px * var(--navbar-scale));
     transform: none;
   }
 
@@ -1942,14 +1957,14 @@ img {
 
 @media (max-width: 380px) {
   .luxury-brand {
-    font-size: 1.45rem;
+    font-size: calc(1.45rem * var(--navbar-scale));
   }
 
 }
 
 @media (max-width: 320px) {
   .luxury-brand {
-    font-size: 1.35rem;
+    font-size: calc(1.35rem * var(--navbar-scale));
   }
 }
 
