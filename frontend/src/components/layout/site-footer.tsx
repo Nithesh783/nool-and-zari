@@ -155,12 +155,6 @@ export default function SiteFooter() {
       <div className="footer-legal">
         <p>
           <span>© 2026 - Nool&amp;Zari</span>
-          <span aria-hidden="true" className="footer-legal-divider">
-            |
-          </span>
-          <span>
-            Website by <strong>Nithesh</strong>
-          </span>
         </p>
       </div>
     </footer>

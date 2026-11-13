@@ -14,16 +14,16 @@ export const footerColumns = [
       { label: "About Us", href: "#craft" },
       { label: "Our Story", href: "#craft" },
       { label: "Stores", href: "#salon" },
-      { label: "FAQs", href: "#footer" },
+      { label: "FAQs", href: "#stories" },
     ],
   },
   {
     title: "Customer Care",
     links: [
       { label: "Contact Us", href: "#salon" },
-      { label: "Orders & Shipping", href: "#footer" },
-      { label: "Return & Exchange", href: "#footer" },
-      { label: "Terms & Conditions", href: "#footer" },
+      { label: "Orders & Shipping", href: "#salon" },
+      { label: "Return & Exchange", href: "#salon" },
+      { label: "Terms & Conditions", href: "#salon" },
     ],
   },
 ];

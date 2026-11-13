@@ -3,7 +3,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
+import {
+  Menu,
+  Search,
+  ShoppingBag,
+  UserRound,
+  X,
+} from "lucide-react";
 import { CART_OPEN_EVENT, getCartCount } from "@/services/cart";
 import CartDrawer from "@/features/cart/cart-drawer";
 import useDismissibleLayer from "@/hooks/use-dismissible-layer";
@@ -13,6 +19,7 @@ export default function SiteHeader() {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [bagCount, setBagCount] = useState(0);
   const [cartOpen, setCartOpen] = useState(false);
@@ -22,11 +29,20 @@ export default function SiteHeader() {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const navigationRef = useRef<HTMLElement>(null);
   const cartButtonRef = useRef<HTMLButtonElement>(null);
+  const accountButtonRef = useRef<HTMLButtonElement>(null);
+  const accountPanelRef = useRef<HTMLDivElement>(null);
   const closeSearch = useCallback(() => setSearchOpen(false), []);
   const closeMenu = useCallback(() => setMenuOpen(false), []);
+  const closeAccount = useCallback(() => setAccountOpen(false), []);
 
   useDismissibleLayer(searchOpen, searchPanelRef, closeSearch, searchButtonRef);
   useDismissibleLayer(menuOpen, navigationRef, closeMenu, menuButtonRef);
+  useDismissibleLayer(
+    accountOpen,
+    accountPanelRef,
+    closeAccount,
+    accountButtonRef,
+  );
 
   useEffect(() => {
     try {
@@ -97,13 +113,44 @@ export default function SiteHeader() {
             >
               {searchOpen ? <X size={20} /> : <Search size={20} />}
             </button>
-            <button
-              aria-label="Your profile"
-              className="profile-button luxury-profile"
-              type="button"
-            >
-              <UserRound size={20} aria-hidden="true" />
-            </button>
+            <div className="account-menu-wrap">
+              <button
+                aria-controls="account-menu"
+                aria-expanded={accountOpen}
+                aria-label={accountOpen ? "Close account menu" : "Your account"}
+                className="profile-button luxury-profile"
+                onClick={() => {
+                  setAccountOpen((open) => !open);
+                  setSearchOpen(false);
+                  setMenuOpen(false);
+                }}
+                ref={accountButtonRef}
+                type="button"
+              >
+                <UserRound size={20} aria-hidden="true" />
+              </button>
+              {accountOpen && (
+                <div
+                  aria-label="Account options"
+                  className="account-menu"
+                  id="account-menu"
+                  ref={accountPanelRef}
+                >
+                  <div className="account-menu-heading">
+                    <strong>Nool &amp; Zari</strong>
+                    <span>Sign in to access your orders</span>
+                  </div>
+                  <Link href="/account/sign-in" onClick={closeAccount}>
+                    <UserRound aria-hidden="true" size={16} />
+                    Sign in
+                  </Link>
+                  <Link href="/account/create-account" onClick={closeAccount}>
+                    <UserRound aria-hidden="true" size={16} />
+                    Create account
+                  </Link>
+                </div>
+              )}
+            </div>
             <button
               aria-label={`Shopping bag, ${bagCount} items`}
               aria-controls="cart-drawer"
