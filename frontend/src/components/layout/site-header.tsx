@@ -103,6 +103,22 @@ export default function SiteHeader() {
             </span>
             <span>Zari</span>
           </Link>
+          <nav
+            aria-label="Main navigation"
+            className={`main-nav luxury-nav${menuOpen ? " is-open" : ""}`}
+            ref={navigationRef}
+          >
+            {navigationLinks.map((link) => (
+              <Link
+                aria-current={pathname === link.href ? "page" : undefined}
+                href={link.href}
+                key={link.label}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
           <div className="header-tools luxury-tools">
             <button
               aria-expanded={searchOpen}
@@ -166,22 +182,6 @@ export default function SiteHeader() {
             </button>
           </div>
         </div>
-        <nav
-          aria-label="Main navigation"
-          className={`main-nav luxury-nav${menuOpen ? " is-open" : ""}`}
-          ref={navigationRef}
-        >
-          {navigationLinks.map((link) => (
-            <Link
-              aria-current={pathname === link.href ? "page" : undefined}
-              href={link.href}
-              key={link.label}
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
         {searchOpen && (
           <form
             className="search-panel luxury-search"
