@@ -45,7 +45,7 @@ export default function HeroSection() {
         <div className="flex min-w-0 flex-col gap-5 sm:gap-6 md:gap-5">
           <div>
             <h1
-              className="text-[clamp(2.35rem,9vw,3.2rem)] font-normal leading-[1.02] tracking-[-0.04em] text-[#0D1B2A] sm:text-[clamp(3rem,6vw,4rem)] lg:text-[clamp(3.5rem,5vw,4.5rem)]"
+              className="hero-title text-[clamp(2.35rem,9vw,3.2rem)] font-normal leading-[1.02] tracking-[-0.04em] text-[#0D1B2A] sm:text-[clamp(3rem,6vw,4rem)] lg:text-[clamp(3.5rem,5vw,4.5rem)]"
               style={{ fontFamily: "var(--hero-serif)" }}
             >
               Where Thread
@@ -53,7 +53,7 @@ export default function HeroSection() {
               <em className="font-normal">Meets Poetry</em>
             </h1>
             <p
-              className="mt-4 max-w-[52ch] text-[15px] leading-6 text-slate-600 sm:mt-5 sm:text-lg sm:leading-7"
+              className="hero-description mt-4 max-w-[52ch] text-[15px] leading-6 text-slate-600 sm:mt-5 sm:text-lg sm:leading-7"
               style={{ fontFamily: "var(--hero-sans)" }}
             >
               Handwoven heirloom silks, gilded zari borders, and contemporary

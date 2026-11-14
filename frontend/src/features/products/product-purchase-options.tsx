@@ -1,10 +1,13 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import type { Product } from "@/types/catalog";
-import { addCartItem, setCheckoutNowItem } from "@/services/cart";
+import {
+  addCartItem,
+  CART_CHECKOUT_NOW_EVENT,
+  setCheckoutNowItem,
+} from "@/services/cart";
 import type { CartItem } from "@/types/cart";
 import styles from "./product-purchase-options.module.css";
 
@@ -13,7 +16,6 @@ export default function ProductPurchaseOptions({
 }: {
   product: Product;
 }) {
-  const router = useRouter();
   const [selectedColor, setSelectedColor] = useState(
     product.swatches[0]?.name ?? "",
   );
@@ -66,7 +68,7 @@ export default function ProductPurchaseOptions({
 
     try {
       setCheckoutNowItem(item);
-      router.push("/checkout?mode=now");
+      window.dispatchEvent(new Event(CART_CHECKOUT_NOW_EVENT));
     } catch (checkoutError) {
       setError(
         checkoutError instanceof Error

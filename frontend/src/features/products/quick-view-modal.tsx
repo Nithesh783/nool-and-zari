@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Minus, Plus, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { formatPrice, getDiscountPercent } from "@/services/catalog";
-import { addCartItem, setCheckoutNowItem } from "@/services/cart";
+import {
+  addCartItem,
+  CART_CHECKOUT_NOW_EVENT,
+  setCheckoutNowItem,
+} from "@/services/cart";
 import useDismissibleLayer from "@/hooks/use-dismissible-layer";
 import type { Product } from "@/types/catalog";
 import type { CartItem } from "@/types/cart";
@@ -36,7 +39,6 @@ export default function QuickViewModal({
   product,
   onClose,
 }: QuickViewModalProps) {
-  const router = useRouter();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
@@ -145,7 +147,8 @@ export default function QuickViewModal({
 
     try {
       setCheckoutNowItem(item);
-      router.push("/checkout?mode=now");
+      onClose();
+      window.dispatchEvent(new Event(CART_CHECKOUT_NOW_EVENT));
     } catch (error) {
       setFeedback(
         error instanceof Error
@@ -164,15 +167,18 @@ export default function QuickViewModal({
         ref={dialogRef}
         role="dialog"
       >
-        <button
-          aria-label="Close quick view"
-          className={styles.closeButton}
-          onClick={onClose}
-          ref={closeButtonRef}
-          type="button"
-        >
-          <X aria-hidden="true" size={21} strokeWidth={1.5} />
-        </button>
+        <div className={styles.mobileHeader}>
+          <span aria-hidden="true">Choose Options</span>
+          <button
+            aria-label="Close quick view"
+            className={styles.closeButton}
+            onClick={onClose}
+            ref={closeButtonRef}
+            type="button"
+          >
+            <X aria-hidden="true" size={21} strokeWidth={1.5} />
+          </button>
+        </div>
         <div className={styles.image}>
           <Image
             alt={product.imageAlt}

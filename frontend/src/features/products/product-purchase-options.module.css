@@ -73,8 +73,6 @@
   margin-top: 0.65rem;
   color: var(--muted);
   font-size: 11px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 .quantityRow {

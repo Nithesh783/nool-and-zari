@@ -18,9 +18,14 @@ export default function useDismissibleLayer(
         return;
       }
 
+      const eventPath = event.composedPath();
       if (
-        contentRef.current?.contains(event.target) ||
-        triggerRef?.current?.contains(event.target)
+        (contentRef.current &&
+          (contentRef.current.contains(event.target) ||
+            eventPath.includes(contentRef.current))) ||
+        (triggerRef?.current &&
+          (triggerRef.current.contains(event.target) ||
+            eventPath.includes(triggerRef.current)))
       ) {
         return;
       }

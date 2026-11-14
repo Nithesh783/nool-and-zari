@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import CheckoutContent from "@/features/checkout/checkout-content";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Checkout | Nool & Zari",
 };
 
-export default function CheckoutPage() {
-  return (
-    <main>
-      <CheckoutContent />
-    </main>
-  );
+export default async function CheckoutPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ mode?: string }>;
+}) {
+  const { mode } = await searchParams;
+  redirect(mode === "now" ? "/cart?checkout=now" : "/cart?checkout=cart");
 }

@@ -103,9 +103,6 @@ export default function ProductShowcase({
             <li>
               <Link href="/">Home</Link>
             </li>
-            <li>
-              <Link href="/all-fabrics">Shop</Link>
-            </li>
             <li aria-current="page">{title}</li>
           </ol>
         </nav>

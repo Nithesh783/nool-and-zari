@@ -1,15 +1,38 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowRight, Check } from "lucide-react";
 
 export default function SalonInvitation() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const resetTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (resetTimerRef.current) {
+        window.clearTimeout(resetTimerRef.current);
+      }
+    };
+  }, []);
 
   function requestPass(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(true);
+
+    if (!email.trim()) {
+      return;
+    }
+
+    setIsSuccess(true);
+    setEmail("");
+
+    if (resetTimerRef.current) {
+      window.clearTimeout(resetTimerRef.current);
+    }
+
+    resetTimerRef.current = window.setTimeout(() => {
+      setIsSuccess(false);
+    }, 1800);
   }
 
   return (
@@ -30,11 +53,10 @@ export default function SalonInvitation() {
             </label>
             <input
               autoComplete="email"
-              disabled={submitted}
               id="salon-email"
               onChange={(event) => setEmail(event.target.value)}
               placeholder={
-                submitted
+                isSuccess
                   ? "Invitation dispatched to your inbox"
                   : "Enter your personal email address"
               }
@@ -42,8 +64,8 @@ export default function SalonInvitation() {
               type="email"
               value={email}
             />
-            <button disabled={submitted} type="submit">
-              {submitted ? (
+            <button type="submit">
+              {isSuccess ? (
                 <>
                   Pass Requested <Check size={15} />
                 </>

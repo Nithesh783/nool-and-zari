@@ -5,10 +5,20 @@ export const metadata: Metadata = {
   title: "Shopping Bag | Nool & Zari",
 };
 
-export default function CartPage() {
+export default async function CartPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ checkout?: string }>;
+}) {
+  const { checkout } = await searchParams;
+
   return (
     <main>
-      <CartContents />
+      <CartContents
+        startCheckout={
+          checkout === "now" ? "now" : checkout === "cart" ? "cart" : null
+        }
+      />
     </main>
   );
 }

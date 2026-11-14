@@ -5,6 +5,7 @@ const CART_STORAGE_KEY = "nool-zari-cart";
 const CHECKOUT_NOW_STORAGE_KEY = "nool-zari-checkout-now";
 const BAG_CHANGE_EVENT = "nool-bag-change";
 export const CART_OPEN_EVENT = "nool-cart-open";
+export const CART_CHECKOUT_NOW_EVENT = "nool-checkout-now";
 
 function validateCartItem(value: unknown): CartItem {
   if (typeof value !== "object" || value === null) {

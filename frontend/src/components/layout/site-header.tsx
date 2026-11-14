@@ -10,7 +10,11 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import { CART_OPEN_EVENT, getCartCount } from "@/services/cart";
+import {
+  CART_CHECKOUT_NOW_EVENT,
+  CART_OPEN_EVENT,
+  getCartCount,
+} from "@/services/cart";
 import CartDrawer from "@/features/cart/cart-drawer";
 import useDismissibleLayer from "@/hooks/use-dismissible-layer";
 import { navigationLinks } from "@/config/site";
@@ -24,6 +28,8 @@ export default function SiteHeader() {
   const [query, setQuery] = useState("");
   const [bagCount, setBagCount] = useState(0);
   const [cartOpen, setCartOpen] = useState(false);
+  const [drawerView, setDrawerView] = useState<"cart" | "checkout">("cart");
+  const [checkoutSource, setCheckoutSource] = useState<"cart" | "now">("cart");
   const closeCart = useCallback(() => setCartOpen(false), []);
   const searchButtonRef = useRef<HTMLButtonElement>(null);
   const searchPanelRef = useRef<HTMLFormElement>(null);
@@ -65,14 +71,24 @@ export default function SiteHeader() {
     }
 
     function openCart() {
+      setDrawerView("cart");
+      setCheckoutSource("cart");
+      setCartOpen(true);
+    }
+
+    function openQuickCheckout() {
+      setDrawerView("checkout");
+      setCheckoutSource("now");
       setCartOpen(true);
     }
 
     window.addEventListener("nool-bag-change", updateCount);
     window.addEventListener(CART_OPEN_EVENT, openCart);
+    window.addEventListener(CART_CHECKOUT_NOW_EVENT, openQuickCheckout);
     return () => {
       window.removeEventListener("nool-bag-change", updateCount);
       window.removeEventListener(CART_OPEN_EVENT, openCart);
+      window.removeEventListener(CART_CHECKOUT_NOW_EVENT, openQuickCheckout);
     };
   }, []);
 
@@ -173,7 +189,15 @@ export default function SiteHeader() {
               aria-controls="cart-drawer"
               aria-expanded={cartOpen}
               className="icon-button count-icon luxury-icon"
-              onClick={() => setCartOpen((open) => !open)}
+              onClick={() => {
+                if (cartOpen) {
+                  setCartOpen(false);
+                } else {
+                  setDrawerView("cart");
+                  setCheckoutSource("cart");
+                  setCartOpen(true);
+                }
+              }}
               ref={cartButtonRef}
               type="button"
             >
@@ -214,9 +238,16 @@ export default function SiteHeader() {
         )}
       </header>
       <CartDrawer
+        checkoutSource={checkoutSource}
         dismissTriggerRef={cartButtonRef}
+        onBackToCart={() => {
+          setDrawerView("cart");
+          setCheckoutSource("cart");
+        }}
         onClose={closeCart}
+        onViewChange={setDrawerView}
         open={cartOpen}
+        view={drawerView}
       />
     </>
   );

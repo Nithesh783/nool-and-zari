@@ -5,21 +5,42 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { formatPrice, getProductById } from "@/services/catalog";
 import {
+  getCheckoutNowItem,
   getCartItems,
   getCartSubtotal,
   removeCartItem,
 } from "@/services/cart";
 import type { CartItem } from "@/types/cart";
+import CheckoutContent from "@/features/checkout/checkout-content";
 import styles from "@/features/commerce/commerce.module.css";
 
-export default function CartContents() {
+export default function CartContents({
+  startCheckout = null,
+}: {
+  startCheckout?: "cart" | "now" | null;
+}) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState("");
+  const [checkoutOpen, setCheckoutOpen] = useState(
+    startCheckout !== null,
+  );
 
   useEffect(() => {
     try {
-      setItems(getCartItems());
+      if (startCheckout === "now") {
+        const item = getCheckoutNowItem();
+        if (!item) {
+          setError(
+            "Your quick checkout selection has expired. Please select the product again.",
+          );
+        } else {
+          setItems([item]);
+        }
+      } else {
+        setItems(getCartItems());
+      }
+      setCheckoutOpen(startCheckout !== null);
     } catch (loadError) {
       setError(
         loadError instanceof Error
@@ -29,7 +50,21 @@ export default function CartContents() {
     } finally {
       setIsReady(true);
     }
-  }, []);
+  }, [startCheckout]);
+
+  function backToBag() {
+    setCheckoutOpen(false);
+    try {
+      setItems(getCartItems());
+      setError("");
+    } catch (loadError) {
+      setError(
+        loadError instanceof Error
+          ? loadError.message
+          : "Your bag could not be loaded.",
+      );
+    }
+  }
 
   function removeItem(index: number) {
     try {
@@ -51,6 +86,15 @@ export default function CartContents() {
     return <p className={styles.notice}>Loading your bag…</p>;
   }
 
+  if (checkoutOpen && !error && items.length > 0) {
+    return (
+      <CheckoutContent
+        items={items}
+        onBack={backToBag}
+      />
+    );
+  }
+
   return (
     <section aria-labelledby="cart-title" className={styles.page}>
       <header className={styles.pageHeading}>
@@ -58,9 +102,20 @@ export default function CartContents() {
         <h1 id="cart-title">Shopping Bag</h1>
       </header>
       {error && (
-        <p className={styles.error} role="alert">
-          {error}
-        </p>
+        <>
+          <p className={styles.error} role="alert">
+            {error}
+          </p>
+          {checkoutOpen && (
+            <button
+              className={styles.primaryLink}
+              onClick={backToBag}
+              type="button"
+            >
+              Back to shopping bag
+            </button>
+          )}
+        </>
       )}
       {!error && items.length === 0 ? (
         <div className={styles.emptyState}>
@@ -117,9 +172,13 @@ export default function CartContents() {
                 <strong>{formatPrice(subtotal)}</strong>
               </div>
               <p>Shipping and any applicable taxes are confirmed at checkout.</p>
-              <Link className={styles.primaryLink} href="/checkout">
+              <button
+                className={styles.primaryLink}
+                onClick={() => setCheckoutOpen(true)}
+                type="button"
+              >
                 Continue to Checkout
-              </Link>
+              </button>
             </aside>
           </div>
         )

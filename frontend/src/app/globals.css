@@ -1450,8 +1450,15 @@ img {
   border-radius: 0;
   background: var(--pearl);
   color: var(--ink);
-  font-size: 10px;
+  font-size: clamp(0.8rem, 0.72vw + 0.64rem, 1.08rem);
+  line-height: 1.4;
   outline-color: var(--gold);
+}
+
+.salon-form input::placeholder {
+  color: rgb(23 27 42 / 62%);
+  font-size: 0.8rem;
+  font-family: inherit;
 }
 
 .salon-form input:focus {
@@ -1469,7 +1476,7 @@ img {
   border: 0;
   background: var(--gold);
   color: var(--night);
-  font-size: 9px;
+  font-size: clamp(0.66rem, 0.56vw + 0.48rem, 0.8rem);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1626,12 +1633,13 @@ img {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  padding: 1rem max(2rem, calc((100% - 1440px) / 2));
+  padding: 0.7rem max(2rem, calc((100% - 1440px) / 2));
   border-top: 1px solid var(--border);
   background: white;
   color: var(--muted);
   font-family: var(--hero-sans);
-  font-size: 11px;
+  font-size: 8.86px;
+  line-height: 9px;
 }
 
 .footer-legal p {
@@ -1809,9 +1817,6 @@ img {
 
   .luxury-nav a[aria-current="page"] {
     color: var(--gold);
-    text-decoration: underline;
-    text-decoration-color: var(--gold);
-    text-underline-offset: 0.3rem;
   }
 
   .luxury-tools {
@@ -2004,6 +2009,19 @@ img {
 }
 
 @media (max-width: 600px) {
+  #new-arrivals .hero-description {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .footer-motto {
+    text-align: center;
+  }
+
+  #new-arrivals .hero-title {
+    text-align: center;
+  }
+
   .hero {
     grid-template-columns: 1fr;
     gap: 1.25rem;
@@ -2319,11 +2337,26 @@ img {
     margin-top: 1.75rem;
   }
 
+  .footer-brand-name {
+    text-align: center;
+  }
+
+  .footer-brand-name a {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
   .footer-legal {
     align-items: center;
     flex-direction: column;
-    padding: 0.85rem max(1.25rem, calc((100% - 1440px) / 2));
-    font-size: 10px;
+    padding: 0.595rem max(1.25rem, calc((100% - 1440px) / 2));
+    font-size: 8.05px;
+    line-height: 8px;
   }
 }
 
