@@ -1,35 +1,111 @@
 # Nool & Zari
 
-Nool & Zari is a storefront application. The Next.js frontend and its dependencies are maintained in `frontend/`. The `backend/` directory is currently empty; no backend service or startup command is available yet.
+**Nool & Zari** is a luxury Indian ethnic wear storefront focused on presenting traditional craftsmanship through a refined, modern shopping experience.
 
-## Requirements
+The repository is organized as a monorepo, with the Next.js frontend maintained in `frontend/`. The `backend/` directory is reserved for future backend development.
 
-- Node.js 18.18 or newer (Node.js 20 LTS is recommended)
+## Project Structure
+
+```text
+Nool&Zari/
+├── backend/          # Reserved for future backend development
+├── frontend/         # Next.js storefront application
+│   ├── public/       # Static assets and images
+│   └── src/          # Application source code
+├── .gitignore
+└── README.md
+```
+
+## Tech Stack
+
+- **Framework:** Next.js
+- **Language:** TypeScript
+- **UI:** React, CSS
+- **Package Manager:** npm
+
+## Features
+
+The storefront includes:
+
+- Product browsing and product details
+- Product categories and collections
+- Product quick-view experience
+- Shopping cart functionality
+- Responsive storefront layout
+
+*Feature availability may evolve as development continues.*
+
+## Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js 18.18 or newer (Node.js 20 LTS recommended)
 - npm
 
-## Install and run the frontend
+## Getting Started
 
-```sh
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd Nool-Zari
+```
+
+### 2. Install dependencies
+
+```bash
 cd frontend
 npm ci
+```
+
+### 3. Start the development server
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Verify a production build
+## Production Build
 
-Run these commands from `frontend/`:
+Run the following commands from the `frontend/` directory:
 
-```sh
+```bash
 npm run lint
 npx tsc --noEmit
 npm run build
+```
+
+After a successful build, start the production server:
+
+```bash
 npm start
 ```
 
-There is no automated test script configured yet.
+## Backend Status
 
-## Environment variables
+The `backend/` directory is currently reserved for future development. No backend service or startup command is configured yet.
 
-The current frontend does not require environment variables. Do not commit local `.env` files or credentials. If environment variables are introduced, document placeholder values in `.env.example` and keep real values in an ignored local environment file.
+## Environment Variables
+
+The current frontend does not require environment variables.
+
+- Do not commit local `.env` files or credentials.
+- If environment variables are introduced, document their placeholder values in `.env.example`.
+- Keep actual credentials in ignored local environment files.
+
+## Testing
+
+There is currently no automated test script configured in the frontend package.
+
+Linting, TypeScript checks, and production builds can be used to verify the application.
+
+## Development Notes
+
+- Frontend development should be carried out inside `frontend/`.
+- Install dependencies from the `frontend/` directory.
+- Keep generated files, build outputs, and local environment files out of version control.
+
+---
+
+**Nool & Zari** — Celebrating the art of Indian craftsmanship.
